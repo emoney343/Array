@@ -10,8 +10,8 @@ public class DeckOfCards {
 
 
     public DeckOfCards() {
-        String[] faces = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King",};
-        String[] suits = { "Spades", "Clubs", "Diamonds", "Hearts"};
+        String[] faces = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
+        String[] suits = { "♠", "♣", "♦", "♥"};
 
         deck = new Card[NUMBER_OF_CARDS];
         currentCard = 0;
@@ -91,9 +91,16 @@ public void reshuffleRemaining() {
     }
 }
 
+enum Straight {
+    INSTANCE;
+
+    public static final int[] straightValues = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+}
+}
+
 
 
     
-} 
+
 
 

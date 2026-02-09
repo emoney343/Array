@@ -1,3 +1,5 @@
+
+
 public class CardGame {
 
     // private static boolean isElementPresent(int[] arr, int key) {
@@ -14,22 +16,38 @@ public class CardGame {
 
         int[] counts = new int[15];
 
-        for (Card card : hand) {
-            counts[card.getValue()]++;
-
+        for (Card c : hand) {
+            int Value = c.getValue();
+            counts[Value]++;
         }
         
-        int pairCount = 0;
-        for (int i = 2; i < 14; i++) {
-            if (counts[i] >= 2) pairCount++;
+        int pairs= 0;
+        int triples = 0;
+        int quads = 0;
 
+        // I have a way to count if theres pairs three of a kind and four of a kind but i need to figure out how to display it correctly
+        
+        for (int i = 2; i <= 14; i++) {
+            if (counts[i] == 2) {
+                pairs++;
+            System.out.println("Pair!");
+            }
+        else if (counts [i] == 3) {
+            triples++;
+            System.out.println("Three of a kind!");
+        }
+        else if (counts [i] == 4) {
+            quads++;
+            System.out.println("Four of a kind!");
+        }
+        }
+        return pairs;
         }
 
-        return pairCount;
+            
+        
 
-    }
 
-       
  
     public static void main(String[] args) {
         DeckOfCards deck = new DeckOfCards();
@@ -39,8 +57,8 @@ public class CardGame {
         
 
         // Deal cards
-        System.out.println("Dealing 10 cards");
-        Card[] hand = deck.dealCards(10);
+        System.out.println("Dealing 20 cards");
+        Card[] hand = deck.dealCards(20);
         for (Card card : hand) System.out.println(card);
 
         int pairCount = countPairs(hand);
