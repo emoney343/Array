@@ -159,10 +159,13 @@ public class CardGame {
 }
         
 System.out.println("Final Score: " + totalScore);
+scanner.close();
     }
 
-    
+
 }
+
+
 
 
 
@@ -193,14 +196,6 @@ System.out.println("Final Score: " + totalScore);
 
         // boolean res = isElementPresent(hand1, key);
         // System.out.println("Is " + key + " present in the hand: " + res);
-    
-
-    
-
-
-    // SO then i need to make a if statement that checks if a certain sequence of numbers is in an array so it can add points to a total score variable and if not
-    // it adds the highest card 
-
     
     
 
