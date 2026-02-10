@@ -8,9 +8,9 @@ public class DeckOfCards {
     public static final int NUMBER_OF_CARDS = 52;
     public static final SecureRandom random = new SecureRandom();
 
-
+    // Figure out how to display the suits symbols
     public DeckOfCards() {
-        String[] faces = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King",};
+        String[] faces = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
         String[] suits = { "Spades", "Clubs", "Diamonds", "Hearts"};
 
         deck = new Card[NUMBER_OF_CARDS];
@@ -89,11 +89,14 @@ public void reshuffleRemaining() {
         deck[i] = deck[j];
         deck[j] = temp;
     }
+    
+}
+
 }
 
 
 
     
-} 
+
 
 

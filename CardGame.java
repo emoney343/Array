@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Comparator;
 
 public class CardGame {
 
@@ -22,7 +24,7 @@ public class CardGame {
         return max;
     }
 
-    private static void evaluateAndPrint(Card[] hand) {
+    private static int evaluateAndPrint(Card[] hand) {
 
         // Store counts
         int[] counts = new int[15];     
@@ -56,42 +58,117 @@ public class CardGame {
 
         boolean straight = isStraight(values);
 
+        int score = 0;
+
         // Print hand evaluation
         if (flush && straight) {
-            System.out.println("Straight Flush");
+            System.out.println("Straight Flush! +9");
+            score += 9;
         } else if (quads == 1) {
-            System.out.println("Four of a Kind");
+            System.out.println("Four of a Kind + 8");
+            score += 8;
         } else if (triples == 1 && pairs == 1) {
-            System.out.println("Full House");
+            System.out.println("Full House + 7");
+            score += 7;
         } else if (flush) {
-            System.out.println("Flush");
+            System.out.println("Flush + 6");
+            score += 6;
         } else if (straight) {
-            System.out.println("Straight");
+            System.out.println("Straight + 5");
+            score += 5;
         } else if (triples == 1) {
-            System.out.println("Three of a Kind");
+            System.out.println("Three of a Kind + 4");
+            score += 4;
         } else if (pairs == 2) {
-            System.out.println("Two Pair");
+            System.out.println("Two Pair + 3");
+            score += 3;
         } else if (pairs == 1) {
-            System.out.println("One Pair");
+            System.out.println("One Pair + 2");
+            score += 2;
         } else {
-            System.out.println("High Card: " + highCard(values));
+            System.out.println("High Card: " + highCard(values) + "+ 1");
+            score += 1;
         }
+
+        return score;
+
+
     }
 
+    static void sortHandByValue(Card[] hand) {
+    Arrays.sort(hand, Comparator.comparingInt(Card::getValue));
+}
+
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int maxRounds = 5;
+        int totalScore = 0;
+
+        for (int round = 1; round <= maxRounds; round++) {
+            System.out.println("Round " + round + (" of ") + maxRounds);
+
         DeckOfCards deck = new DeckOfCards();
         deck.shuffle();
 
-        System.out.println("Dealing 5 cards");
-        Card[] hand = deck.dealCards(5);
+        Card[] playerCards = deck.dealCards(10);
 
-        for (Card card : hand) {
-            System.out.println(card);
+        sortHandByValue(playerCards);
+
+        
+        boolean[] used = new boolean[10];
+        
+        System.out.println("Your cards: ");
+        
+        for (int i = 0; i < playerCards.length; i ++) {
+            
+        System.out.println(i + ": " + playerCards[i]);
+            
         }
 
-        evaluateAndPrint(hand);
-    }
+        Card[] hand1 = new Card[5];
+
+        System.out.println("Pick a number 0-9 to play card");
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Pick card: "); 
+            int index = scanner.nextInt();
+
+            if (index < 0 || index > 9) {
+                System.out.println("Invalid card, please pick again.");
+                i--;
+                continue;
+
+            } else if (used[index]) {
+                System.out.println("You already picked that card.");
+                i--;
+            
+            } else {
+            used[index] = true;
+            hand1[i] = playerCards[index];
+            }
+
+        } 
+        System.out.println("Your final hand");
+            for (Card c : hand1)
+                System.out.println(c);
+
+        int roundScore = evaluateAndPrint(hand1);
+        totalScore += roundScore;
+        System.out.println("Score: " + totalScore);
 }
+        
+System.out.println("Final Score: " + totalScore);
+    }
+
+    
+}
+
+
+
+    
+    
+
 
 
 
