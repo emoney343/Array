@@ -32,6 +32,16 @@ public class Card {
     throw new IllegalArgumentException("Invalid card face: " + face);
     }
 
+     public int getSuits() {
+    String suit = this.suit;
+    switch (suit) {
+        case "Spades": return  1;
+        case "Clubs": return 2;
+        case "Diamonds": return 3;
+        case "Hearts":  return 4;
+    }
+    throw new IllegalArgumentException("Invalid card Suit: " + suit);
  }
+}
     
 
