@@ -95,6 +95,7 @@ public class CardGame {
 
     }
 
+    // Method to sort hand by value
     static void sortHandByValue(Card[] hand) {
     Arrays.sort(hand, Comparator.comparingInt(Card::getValue));
 }
@@ -105,9 +106,11 @@ public class CardGame {
         int maxRounds = 5;
         int totalScore = 0;
 
+        // Loop for each round
         for (int round = 1; round <= maxRounds; round++) {
             System.out.println("Round " + round + (" of ") + maxRounds);
 
+        // Shuffle, deal, and organize deck based on value
         DeckOfCards deck = new DeckOfCards();
         deck.shuffle();
 
@@ -115,9 +118,10 @@ public class CardGame {
 
         sortHandByValue(playerCards);
 
-        
+        // Used to check for duplicates
         boolean[] used = new boolean[10];
-        
+
+        // Basic Game logic, display deck and allow user to play card based on index
         System.out.println("Your cards: ");
         
         for (int i = 0; i < playerCards.length; i ++) {
@@ -133,22 +137,25 @@ public class CardGame {
         for (int i = 0; i < 5; i++) {
             System.out.println("Pick card: "); 
             int index = scanner.nextInt();
-
+            
+            // Checks for out of bounds number
             if (index < 0 || index > 9) {
                 System.out.println("Invalid card, please pick again.");
                 i--;
                 continue;
-
+            // Checks for duplicates
             } else if (used[index]) {
                 System.out.println("You already picked that card.");
                 i--;
             
+            // Add played card to player card index
             } else {
             used[index] = true;
             hand1[i] = playerCards[index];
             }
 
         } 
+        // Print final played hand, evaluate it, add to and display score
         System.out.println("Your final hand");
             for (Card c : hand1)
                 System.out.println(c);
@@ -157,7 +164,8 @@ public class CardGame {
         totalScore += roundScore;
         System.out.println("Score: " + totalScore);
 }
-        
+
+// Print final score
 System.out.println("Final Score: " + totalScore);
 scanner.close();
     }
